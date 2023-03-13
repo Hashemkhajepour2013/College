@@ -1,40 +1,18 @@
-using College.WebFramework.Configuration;
+using Autofac.Extensions.DependencyInjection;
+using College.WebAPI;
 
 internal class Program
 {
-    public static IConfiguration Configuration;
-    Program(IConfiguration configuration)
-    {
-        Configuration = configuration;
-    }
     private static void Main(string[] args)
     {
-        var builder = WebApplication.CreateBuilder(args);
-
-        builder.Services.AddDbContext(Configuration);
-
-        builder.Services.AddControllers();
-
-        builder.Services.AddEndpointsApiExplorer();
-
-        builder.Services.AddSwaggerGen();
-
-        var app = builder.Build();
-
-        app.IntializeDatabase();
-
-        if (app.Environment.IsDevelopment())
-        {
-            app.UseSwagger();
-            app.UseSwaggerUI();
-        }
-
-        app.UseHttpsRedirection();
-
-        app.UseAuthorization();
-
-        app.MapControllers();
-
-        app.Run();
+        CreateHostBuilder(args).Build().RunAsync();
     }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+          Host.CreateDefaultBuilder(args)
+              .UseServiceProviderFactory(new AutofacServiceProviderFactory())
+              .ConfigureWebHostDefaults(webBuilder =>
+              {
+                  webBuilder.UseStartup<Startup>();
+              });
 }
