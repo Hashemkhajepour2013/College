@@ -15,6 +15,12 @@ namespace College.WebAPI.Controllers
             _service = service;
         }
 
+        /// <summary>
+        ///  This Method generate Term
+        /// </summary>
+        /// <param name="dto">the information for create term</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         [HttpPost]
         public Task<int> Add(AddTermDto dto, CancellationToken cancellationToken)
         {

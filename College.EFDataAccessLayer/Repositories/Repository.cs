@@ -1,7 +1,7 @@
-﻿using College.EFDataAccessLayer.Repositories.Contracts;
+﻿using College.Common.Utilities;
+using College.EFDataAccessLayer.Repositories.Contracts;
 using College.Entities;
 using College.Persistence.EF;
-using Common.Utilities;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 

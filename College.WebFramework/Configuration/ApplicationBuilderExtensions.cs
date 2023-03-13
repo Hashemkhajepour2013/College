@@ -1,6 +1,6 @@
-﻿using College.Persistence.EF;
+﻿using College.Common.Utilities;
+using College.Persistence.EF;
 using College.Services.DataInitializer;
-using Common.Utilities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

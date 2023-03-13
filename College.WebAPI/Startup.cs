@@ -1,10 +1,12 @@
 ﻿using College.WebFramework.Configuration;
+using College.WebFramework.Swagger;
 
 namespace College.WebAPI
 {
     public class Startup
     {
         public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -17,26 +19,28 @@ namespace College.WebAPI
 
             services.AddEndpointsApiExplorer();
 
-            services.AddSwaggerGen();
+            services.AddSwagger();
         }
 
-        public void Configure(WebApplication app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.IntializeDatabase();
 
             if (env.IsDevelopment())
             {
-                app.UseSwagger();
-                app.UseSwaggerUI();
+                app.UseSwaggerAndUI();
             }
+
+            app.UseRouting();
 
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-            app.MapControllers();
-
-            app.Run();
+            app.UseEndpoints(config =>
+            {
+                config.MapControllers();
+            });
         }
     }
 }
