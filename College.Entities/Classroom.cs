@@ -1,8 +1,9 @@
 ﻿using College.Entities.Common;
+using College.Entities.Users;
 
 namespace College.Entities
 {
-    public sealed class Classroom : BaseEntity
+    public class Classroom : BaseEntity
     {
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }

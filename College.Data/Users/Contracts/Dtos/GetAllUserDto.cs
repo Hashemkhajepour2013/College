@@ -1,9 +1,9 @@
-﻿using College.Entities;
+﻿using College.Entities.Users;
 using College.MyApi;
 
 namespace College.Data.Users.Contracts.Dtos
 {
-    public class GetAllUserDto: BaseDto<GetAllUserDto, User, int>
+    public class GetAllUserDto: BaseDto<GetAllUserDto, Student, int>
     {
         public int Id { get; set; }
         public string FirstName { get; set; }

@@ -1,14 +1,13 @@
-﻿using College.Entities;
+﻿using College.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace College.Data.Users
+namespace College.Data.Users.Professors
 {
-    public sealed class UserEntityMap : IEntityTypeConfiguration<User>
+    public class ProfessorEntityMap : IEntityTypeConfiguration<Professor>
     {
-        public void Configure(EntityTypeBuilder<User> builder)
+        public void Configure(EntityTypeBuilder<Professor> builder)
         {
-            builder.HasKey(_ => _.Id);
             builder.Property(_ => _.Id).IsRequired();
             builder.Property(_ => _.FirstName).HasMaxLength(100).IsRequired();
             builder.Property(_ => _.LastName).HasMaxLength(100).IsRequired();
@@ -18,6 +17,8 @@ namespace College.Data.Users
             builder.Property(_ => _.ImageName).HasMaxLength(455).IsRequired(false);
             builder.Property(_ => _.UserName).HasMaxLength(50).IsRequired();
             builder.Property(_ => _.UsernameOfMaker).HasMaxLength(50).IsRequired();
+            builder.Property(_ => _.DegreeOfEducation).HasMaxLength(100).IsRequired();
+            builder.Property(_ => _.ContractType).IsRequired();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using College.Data.Repositories.Contracts;
 using College.Data.Users.Contracts.Dtos;
-using College.Entities;
+using College.Entities.Users;
 
 namespace College.Data.Users.Contracts
 {

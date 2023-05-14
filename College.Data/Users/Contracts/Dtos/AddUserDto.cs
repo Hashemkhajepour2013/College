@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using College.Entities;
 using College.MyApi;
+using College.Entities.Users;
 
 namespace College.Data.Users.Contracts.Dtos
 {
-    public class AddUserDto : BaseDto<AddUserDto, User, int>
+    public class AddUserDto : BaseDto<AddUserDto, Student, int>
     {
         [Required]
         [MaxLength(100)]

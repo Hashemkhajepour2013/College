@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using College.Entities;
+using College.Entities.Users;
 using College.MyApi;
 
 namespace College.Data.Users.Contracts.Dtos
 {
-    public class EditUserDto: BaseDto<EditUserDto, User, int>
+    public class EditUserDto: BaseDto<EditUserDto, Student, int>
     {
         [Required]
         [MaxLength(100)]

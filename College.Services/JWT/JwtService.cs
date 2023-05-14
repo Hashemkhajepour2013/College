@@ -1,5 +1,5 @@
 ﻿using College.Common;
-using College.Entities;
+using College.Entities.Users;
 using College.Services.JWT.Contracts;
 using College.Services.JWT.Contracts.Dto;
 using Microsoft.AspNetCore.Identity;

@@ -1,4 +1,4 @@
-﻿using College.Entities;
+﻿using College.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -22,7 +22,7 @@ namespace College.Services.DataInitializer
             {
                 foreach (var user in _siteSetting.Users)
                 {
-                    var Userdb = new User
+                    var Userdb = new Student
                     {
                         FirstName = user.FirstName,
                         LastName = user.LastName,

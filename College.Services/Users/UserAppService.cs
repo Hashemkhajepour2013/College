@@ -4,7 +4,7 @@ using College.Common;
 using College.Common.Exceptions;
 using College.Data.Users.Contracts;
 using College.Data.Users.Contracts.Dtos;
-using College.Entities;
+using College.Entities.Users;
 using College.Services.JWT.Contracts;
 using College.Services.JWT.Contracts.Dto;
 using Microsoft.AspNetCore.Identity;
@@ -47,12 +47,12 @@ namespace College.Services.Users
             await _userManager.DeleteAsync(user);
         }
 
-        public async Task Edit(int id, EditUserDto dto, CancellationToken cancellationToken)
-        {
-            var user = await StopIfUserNotFound(id);
+        //public async Task Edit(int id, EditUserDto dto, CancellationToken cancellationToken)
+        //{
+        //    var user = await StopIfUserNotFound(id);
                         
-            await _userManager.UpdateAsync(dto.ToEntity(_mapper, user));
-        }
+        //    await _userManager.UpdateAsync(dto.ToEntity(_mapper, user));
+        //}
 
         public Task<List<GetAllUserDto>> GetAll(CancellationToken cancellationToken)
         {
@@ -61,13 +61,13 @@ namespace College.Services.Users
                 .ToListAsync(cancellationToken);
         }
 
-        public async Task<GetByIdUserDto?> GetById(
-            int id,
-            CancellationToken cancellationToken)
-        {
-            var user = await StopIfUserNotFound(id);
-            return GetByIdUserDto.FromEntity(_mapper, user);
-        }
+        //public async Task<GetByIdUserDto?> GetById(
+        //    int id,
+        //    CancellationToken cancellationToken)
+        //{
+        //    var user = await StopIfUserNotFound(id);
+        //    return GetByIdUserDto.FromEntity(_mapper, user);
+        //}
 
         public async Task<AccessUserToken> Token(
             LoginUserDto dto,

@@ -8,6 +8,7 @@ using College.Data.Lessons.Contracts;
 using College.Data.Lessons.Contracts.Dtos;
 using College.Data.Terms.Contracts;
 using College.Entities;
+using College.Entities.Users;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

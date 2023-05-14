@@ -13,9 +13,9 @@ namespace College.Data.Users.Contracts
 
         Task Delete(int id, CancellationToken cancellationToken);
 
-        Task Edit(int id, EditUserDto dto, CancellationToken cancellationToken);
+        //Task Edit(int id, EditUserDto dto, CancellationToken cancellationToken);
 
-        Task<GetByIdUserDto?> GetById(int id, CancellationToken cancellationToken);
+        //Task<GetByIdUserDto?> GetById(int id, CancellationToken cancellationToken);
 
         Task<AccessUserToken> Token(LoginUserDto dto, CancellationToken cancellationToken);
 

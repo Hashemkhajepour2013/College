@@ -3,7 +3,7 @@ using College.Common;
 using College.Data.Repositories;
 using College.Data.Users.Contracts;
 using College.Data.Users.Contracts.Dtos;
-using College.Entities;
+using College.Entities.Users;
 using Microsoft.EntityFrameworkCore;
 
 namespace College.Data.Users

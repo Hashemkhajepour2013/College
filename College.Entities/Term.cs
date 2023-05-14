@@ -2,7 +2,7 @@
 
 namespace College.Entities
 {
-    public sealed class Term : BaseEntity
+    public class Term : BaseEntity
     {
         public string Title { get; set; }
         public byte UnitCount { get; set; }

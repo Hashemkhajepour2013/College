@@ -44,20 +44,20 @@ namespace College.MyApi.Controllers
             return Ok();
         }
 
-        [HttpPut("{id}")]
-        [Authorize(Roles = "Admin")]
-        public async Task<ApiResult> Edit(int id, EditUserDto dto, CancellationToken cancellationToken)
-        {
-            await _service.Edit(id, dto, cancellationToken);
-            return Ok();
-        }
+        //[HttpPut("{id}")]
+        //[Authorize(Roles = "Admin")]
+        //public async Task<ApiResult> Edit(int id, EditUserDto dto, CancellationToken cancellationToken)
+        //{
+        //    await _service.Edit(id, dto, cancellationToken);
+        //    return Ok();
+        //}
 
-        [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,User")]
-        public async Task<ApiResult<GetByIdUserDto>> GetById(int id, CancellationToken cancellationToken)
-        {
-            return await _service.GetById(id, cancellationToken);
-        }
+        //[HttpGet("{id}")]
+        //[Authorize(Roles = "Admin,User")]
+        //public async Task<ApiResult<GetByIdUserDto>> GetById(int id, CancellationToken cancellationToken)
+        //{
+        //    return await _service.GetById(id, cancellationToken);
+        //}
 
         [HttpPost("Token")]
         public async Task<ActionResult> Token([FromForm] LoginUserDto dto, CancellationToken cancellationToken)

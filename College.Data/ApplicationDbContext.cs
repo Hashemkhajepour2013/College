@@ -1,10 +1,12 @@
 ﻿using College.Common.Utilities;
 using College.Entities;
 using College.Entities.Common;
+using College.Entities.Users;
 using College.Services.DataInitializer;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using System.Diagnostics.Contracts;
 using System.Reflection;
 
 namespace College.Data
@@ -18,7 +20,7 @@ namespace College.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(modelBuilder);           
 
             var entitiesAssembly = typeof(IEntity).Assembly;
 
@@ -31,6 +33,11 @@ namespace College.Data
             modelBuilder.AddRestrictDeleteBehaviorConvention();
 
             modelBuilder.AddPluralizingTableNameConvention();
+
+            modelBuilder.Entity<User>()
+               .HasDiscriminator<int>("UserType")
+               .HasValue<Professor>(1)
+               .HasValue<Student>(2);
         }
 
         public override int SaveChanges()

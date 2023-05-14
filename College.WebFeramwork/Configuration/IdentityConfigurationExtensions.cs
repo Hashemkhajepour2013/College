@@ -1,5 +1,6 @@
 ﻿using College.Data;
 using College.Entities;
+using College.Entities.Users;
 using College.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;

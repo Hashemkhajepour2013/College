@@ -1,9 +1,9 @@
 ﻿using College.Entities.Common;
 using Microsoft.AspNetCore.Identity;
 
-namespace College.Entities
+namespace College.Entities.Users
 {
-    public sealed class User : IdentityUser<int>, IEntity<int>
+    public abstract class User : IdentityUser<int>, IEntity<int>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

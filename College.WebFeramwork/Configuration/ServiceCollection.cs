@@ -14,7 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
-using College.Entities;
+using College.Entities.Users;
 
 namespace College.WebFrameWork.Configuration
 {

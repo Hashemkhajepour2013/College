@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace College.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class initial : Migration
+    public partial class initail : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -39,6 +39,15 @@ namespace College.Data.Migrations
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(455)", maxLength: 455, nullable: true),
                     UsernameOfMaker = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserType = table.Column<int>(type: "int", nullable: false),
+                    DegreeOfEducation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    ContractType = table.Column<int>(type: "int", nullable: true),
+                    EntryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GraduationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    State = table.Column<int>(type: "int", nullable: true),
+                    Grade = table.Column<int>(type: "int", nullable: true),
+                    ConditionalSemesters = table.Column<byte>(type: "tinyint", nullable: true),
+                    SemestersTaken = table.Column<byte>(type: "tinyint", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

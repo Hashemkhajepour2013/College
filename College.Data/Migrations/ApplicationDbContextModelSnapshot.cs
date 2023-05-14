@@ -134,7 +134,7 @@ namespace College.Data.Migrations
                     b.ToTable("Terms");
                 });
 
-            modelBuilder.Entity("College.Entities.User", b =>
+            modelBuilder.Entity("College.Entities.Users.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -219,6 +219,9 @@ namespace College.Data.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<int>("UserType")
+                        .HasColumnType("int");
+
                     b.Property<string>("UsernameOfMaker")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -235,6 +238,10 @@ namespace College.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasDiscriminator<int>("UserType");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -340,6 +347,50 @@ namespace College.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("College.Entities.Users.Professor", b =>
+                {
+                    b.HasBaseType("College.Entities.Users.User");
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DegreeOfEducation")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator().HasValue(1);
+                });
+
+            modelBuilder.Entity("College.Entities.Users.Student", b =>
+                {
+                    b.HasBaseType("College.Entities.Users.User");
+
+                    b.Property<byte>("ConditionalSemesters")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("GraduationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("SemestersTaken")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator().HasValue(2);
+                });
+
             modelBuilder.Entity("College.Entities.Classroom", b =>
                 {
                     b.HasOne("College.Entities.Lesson", "Lesson")
@@ -348,7 +399,7 @@ namespace College.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("College.Entities.User", "Professor")
+                    b.HasOne("College.Entities.Users.User", "Professor")
                         .WithMany("Classrooms")
                         .HasForeignKey("ProfessorId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -378,7 +429,7 @@ namespace College.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("College.Entities.User", null)
+                    b.HasOne("College.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -387,7 +438,7 @@ namespace College.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("College.Entities.User", null)
+                    b.HasOne("College.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -402,7 +453,7 @@ namespace College.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("College.Entities.User", null)
+                    b.HasOne("College.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -411,7 +462,7 @@ namespace College.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("College.Entities.User", null)
+                    b.HasOne("College.Entities.Users.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -428,7 +479,7 @@ namespace College.Data.Migrations
                     b.Navigation("Classrooms");
                 });
 
-            modelBuilder.Entity("College.Entities.User", b =>
+            modelBuilder.Entity("College.Entities.Users.User", b =>
                 {
                     b.Navigation("Classrooms");
                 });
