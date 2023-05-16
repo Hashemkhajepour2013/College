@@ -5,7 +5,7 @@ namespace College.Entities.Users
     public sealed class Student : User
     {
         public DateTime EntryDate { get; set; }
-        public DateTime GraduationDate { get; set; }
+        public DateTime? GraduationDate { get; set; }
         public State State { get; set; }
         public Grade Grade { get; set; }
         public byte ConditionalSemesters { get; set; }

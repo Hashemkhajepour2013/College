@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230514064140_initail")]
-    partial class initail
+    [Migration("20230516044821_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -380,7 +380,7 @@ namespace College.Data.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("GraduationDate")
+                    b.Property<DateTime?>("GraduationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<byte>("SemestersTaken")

@@ -18,7 +18,7 @@ namespace College.Data.Users.Students
             builder.Property(_ => _.UserName).HasMaxLength(50).IsRequired();
             builder.Property(_ => _.UsernameOfMaker).HasMaxLength(50).IsRequired();
             builder.Property(_ => _.EntryDate).IsRequired();
-            builder.Property(_ => _.GraduationDate).IsRequired();
+            builder.Property(_ => _.GraduationDate).IsRequired(false);
             builder.Property(_ => _.State).IsRequired();
             builder.Property(_ => _.Grade).IsRequired();
             builder.Property(_ => _.ConditionalSemesters).IsRequired();

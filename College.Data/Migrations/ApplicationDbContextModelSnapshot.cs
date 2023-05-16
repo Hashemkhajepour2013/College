@@ -377,7 +377,7 @@ namespace College.Data.Migrations
                     b.Property<int>("Grade")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("GraduationDate")
+                    b.Property<DateTime?>("GraduationDate")
                         .HasColumnType("datetime2");
 
                     b.Property<byte>("SemestersTaken")
