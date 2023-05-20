@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230520170607_initial")]
+    [Migration("20230520173849_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -214,6 +214,8 @@ namespace College.Data.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Students");
                 });
@@ -466,6 +468,17 @@ namespace College.Data.Migrations
                     b.Navigation("Student");
 
                     b.Navigation("classroom");
+                });
+
+            modelBuilder.Entity("College.Entities.Users.Student", b =>
+                {
+                    b.HasOne("College.Entities.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

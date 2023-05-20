@@ -89,25 +89,6 @@ namespace College.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Students",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    EntryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GraduationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    State = table.Column<int>(type: "int", nullable: false),
-                    Grade = table.Column<int>(type: "int", nullable: false),
-                    ConditionalSemesters = table.Column<byte>(type: "tinyint", nullable: false),
-                    SemestersTaken = table.Column<byte>(type: "tinyint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Students", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Terms",
                 columns: table => new
                 {
@@ -221,6 +202,31 @@ namespace College.Data.Migrations
                     table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
                     table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    EntryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GraduationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    State = table.Column<int>(type: "int", nullable: false),
+                    Grade = table.Column<int>(type: "int", nullable: false),
+                    ConditionalSemesters = table.Column<byte>(type: "tinyint", nullable: false),
+                    SemestersTaken = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Students_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -352,6 +358,11 @@ namespace College.Data.Migrations
                 name: "IX_StudentClassrooms_StudentId",
                 table: "StudentClassrooms",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Students_UserId",
+                table: "Students",
+                column: "UserId");
         }
 
         /// <inheritdoc />
@@ -379,9 +390,6 @@ namespace College.Data.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "Classrooms");
 
             migrationBuilder.DropTable(
@@ -395,6 +403,9 @@ namespace College.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Terms");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }

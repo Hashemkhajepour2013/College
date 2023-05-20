@@ -6,6 +6,7 @@ namespace College.Entities.Users
     public class Student : BaseEntity
     {
         public int UserId { get; set; }
+        public User User { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime? GraduationDate { get; set; }
         public State State { get; set; }
@@ -14,7 +15,6 @@ namespace College.Entities.Users
         public byte SemestersTaken { get; set; }
 
         public List<StudentClassroom> StudentClassrooms { get; set; } = new();
-
     }
 
     public enum State

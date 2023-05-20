@@ -212,6 +212,8 @@ namespace College.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Students");
                 });
 
@@ -463,6 +465,17 @@ namespace College.Data.Migrations
                     b.Navigation("Student");
 
                     b.Navigation("classroom");
+                });
+
+            modelBuilder.Entity("College.Entities.Users.Student", b =>
+                {
+                    b.HasOne("College.Entities.Users.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>

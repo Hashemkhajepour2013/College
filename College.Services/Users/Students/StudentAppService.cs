@@ -1,10 +1,11 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using College.Common;
-using College.Data.Repositories;
 using College.Data.Users.Students.Contracts;
 using College.Data.Users.Students.Contracts.Dtos;
 using College.Entities.Users;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace College.Services.Users.Students
 {
@@ -44,6 +45,14 @@ namespace College.Services.Users.Students
             };
 
             await _repository.AddAsync(student, cancellationToken);
+        }
+
+        public async Task<GetStudentByIdDto?> GetById(int userId, CancellationToken cancellationToken)
+        {
+            return await _repository.TableNoTracking
+                .Include(_ => _.User)
+                .ProjectTo<GetStudentByIdDto>(_mapper.ConfigurationProvider)
+                .FirstOrDefaultAsync(cancellationToken);
         }
     }
 }
