@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using College.Entities.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace College.Entities.Users
 {
-    public sealed class Student : User
+    public class Student : BaseEntity
     {
+        public int UserId { get; set; }
         public DateTime EntryDate { get; set; }
         public DateTime? GraduationDate { get; set; }
         public State State { get; set; }
@@ -11,6 +13,7 @@ namespace College.Entities.Users
         public byte ConditionalSemesters { get; set; }
         public byte SemestersTaken { get; set; }
 
+        public List<StudentClassroom> StudentClassrooms { get; set; } = new();
 
     }
 

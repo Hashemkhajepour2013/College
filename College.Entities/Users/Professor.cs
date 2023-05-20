@@ -1,12 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using College.Entities.Common;
+using System.ComponentModel.DataAnnotations;
 
 namespace College.Entities.Users
 {
-    public sealed class Professor : User
+    public class Professor : BaseEntity
     {
+        public int UserId { get; set; }
         public string DegreeOfEducation { get; set; }
 
         public ContractType ContractType { get; set; }
+
+        public List<Classroom> Classrooms { get; set; } = new();
     }
 
     public enum ContractType

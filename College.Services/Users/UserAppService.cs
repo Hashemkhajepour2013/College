@@ -31,6 +31,7 @@ namespace College.Services.Users
         public async Task Add(AddUserDto dto, CancellationToken cancellationToken)
         {
             var user = dto.ToEntity(_mapper);
+
             await _userManager.CreateAsync(user, dto.Password);
 
             await _userManager.AddToRoleAsync(user, dto.RoleName);

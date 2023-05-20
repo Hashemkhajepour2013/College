@@ -5,7 +5,7 @@ using College.Entities.Users;
 
 namespace College.Data.Users.Contracts.Dtos
 {
-    public class AddUserDto : BaseDto<AddUserDto, Student, int>
+    public class AddUserDto : BaseDto<AddUserDto, User, int>
     {
         [Required]
         [MaxLength(100)]

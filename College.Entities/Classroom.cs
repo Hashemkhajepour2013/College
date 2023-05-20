@@ -15,6 +15,9 @@ namespace College.Entities
         public Lesson Lesson { get; set; }
 
         public int ProfessorId { get; set; }
-        public User Professor { get; set; }
+
+        public Professor Professor { get; set; }
+
+        public List<StudentClassroom> StudentClassrooms { get; set; } = new();
     }
 }

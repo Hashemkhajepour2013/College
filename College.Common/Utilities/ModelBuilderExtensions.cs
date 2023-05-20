@@ -52,8 +52,7 @@ namespace College.Common.Utilities
         public static void RegisterAllEntities<BaseType>(this ModelBuilder modelBuilder, params Assembly[] assemblies)
         {
             IEnumerable<Type> types = assemblies.SelectMany(_ => _.GetExportedTypes())
-                .Where(__ => __.IsClass && !__.IsAbstract && __.IsPublic && typeof(BaseType).IsAssignableFrom(__) 
-                && !__.IsSealed);
+                .Where(__ => __.IsClass && !__.IsAbstract && __.IsPublic && typeof(BaseType).IsAssignableFrom(__));
 
             foreach (Type type in types)
             {

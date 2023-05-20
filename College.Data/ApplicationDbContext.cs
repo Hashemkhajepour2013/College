@@ -33,11 +33,6 @@ namespace College.Data
             modelBuilder.AddRestrictDeleteBehaviorConvention();
 
             modelBuilder.AddPluralizingTableNameConvention();
-
-            modelBuilder.Entity<User>()
-               .HasDiscriminator<int>("UserType")
-               .HasValue<Professor>(1)
-               .HasValue<Student>(2);
         }
 
         public override int SaveChanges()

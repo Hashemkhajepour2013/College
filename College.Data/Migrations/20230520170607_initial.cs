@@ -34,21 +34,12 @@ namespace College.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
                     LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    FatherName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    FatherName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     NationalCode = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(455)", maxLength: 455, nullable: true),
                     UsernameOfMaker = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
-                    UserType = table.Column<int>(type: "int", nullable: false),
-                    DegreeOfEducation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    ContractType = table.Column<int>(type: "int", nullable: true),
-                    EntryDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    GraduationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    State = table.Column<int>(type: "int", nullable: true),
-                    Grade = table.Column<int>(type: "int", nullable: true),
-                    ConditionalSemesters = table.Column<byte>(type: "tinyint", nullable: true),
-                    SemestersTaken = table.Column<byte>(type: "tinyint", nullable: true),
-                    UserName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -80,6 +71,40 @@ namespace College.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Lessons", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Professors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    DegreeOfEducation = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ContractType = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Professors", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Students",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    EntryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GraduationDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    State = table.Column<int>(type: "int", nullable: false),
+                    Grade = table.Column<int>(type: "int", nullable: false),
+                    ConditionalSemesters = table.Column<byte>(type: "tinyint", nullable: false),
+                    SemestersTaken = table.Column<byte>(type: "tinyint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Students", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -219,21 +244,47 @@ namespace College.Data.Migrations
                 {
                     table.PrimaryKey("PK_Classrooms", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Classrooms_AspNetUsers_ProfessorId",
-                        column: x => x.ProfessorId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
                         name: "FK_Classrooms_Lessons_LessonId",
                         column: x => x.LessonId,
                         principalTable: "Lessons",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
+                        name: "FK_Classrooms_Professors_ProfessorId",
+                        column: x => x.ProfessorId,
+                        principalTable: "Professors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Classrooms_Terms_TermId",
                         column: x => x.TermId,
                         principalTable: "Terms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "StudentClassrooms",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ClassroomId = table.Column<int>(type: "int", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_StudentClassrooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StudentClassrooms_Classrooms_ClassroomId",
+                        column: x => x.ClassroomId,
+                        principalTable: "Classrooms",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_StudentClassrooms_Students_StudentId",
+                        column: x => x.StudentId,
+                        principalTable: "Students",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -291,6 +342,16 @@ namespace College.Data.Migrations
                 name: "IX_Classrooms_TermId",
                 table: "Classrooms",
                 column: "TermId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentClassrooms_ClassroomId",
+                table: "StudentClassrooms",
+                column: "ClassroomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StudentClassrooms_StudentId",
+                table: "StudentClassrooms",
+                column: "StudentId");
         }
 
         /// <inheritdoc />
@@ -312,7 +373,7 @@ namespace College.Data.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Classrooms");
+                name: "StudentClassrooms");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -321,7 +382,16 @@ namespace College.Data.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Classrooms");
+
+            migrationBuilder.DropTable(
+                name: "Students");
+
+            migrationBuilder.DropTable(
                 name: "Lessons");
+
+            migrationBuilder.DropTable(
+                name: "Professors");
 
             migrationBuilder.DropTable(
                 name: "Terms");

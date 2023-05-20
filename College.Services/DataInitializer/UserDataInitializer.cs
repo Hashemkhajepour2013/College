@@ -22,7 +22,7 @@ namespace College.Services.DataInitializer
             {
                 foreach (var user in _siteSetting.Users)
                 {
-                    var Userdb = new Student
+                    var Userdb = new User
                     {
                         FirstName = user.FirstName,
                         LastName = user.LastName,

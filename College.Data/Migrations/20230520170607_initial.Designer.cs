@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230516044821_initial")]
+    [Migration("20230520170607_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -116,6 +116,29 @@ namespace College.Data.Migrations
                     b.ToTable("AspNetRoles", (string)null);
                 });
 
+            modelBuilder.Entity("College.Entities.StudentClassroom", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ClassroomId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ClassroomId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentClassrooms");
+                });
+
             modelBuilder.Entity("College.Entities.Term", b =>
                 {
                     b.Property<int>("Id")
@@ -135,6 +158,64 @@ namespace College.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Terms");
+                });
+
+            modelBuilder.Entity("College.Entities.Users.Professor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ContractType")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DegreeOfEducation")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Professors");
+                });
+
+            modelBuilder.Entity("College.Entities.Users.Student", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<byte>("ConditionalSemesters")
+                        .HasColumnType("tinyint");
+
+                    b.Property<DateTime>("EntryDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("GraduationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<byte>("SemestersTaken")
+                        .HasColumnType("tinyint");
+
+                    b.Property<int>("State")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("College.Entities.Users.User", b =>
@@ -160,7 +241,6 @@ namespace College.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FatherName")
-                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
@@ -218,12 +298,8 @@ namespace College.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("UserName")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int>("UserType")
-                        .HasColumnType("int");
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
 
                     b.Property<string>("UsernameOfMaker")
                         .IsRequired()
@@ -241,10 +317,6 @@ namespace College.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-
-                    b.HasDiscriminator<int>("UserType");
-
-                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -350,50 +422,6 @@ namespace College.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("College.Entities.Users.Professor", b =>
-                {
-                    b.HasBaseType("College.Entities.Users.User");
-
-                    b.Property<int>("ContractType")
-                        .HasColumnType("int");
-
-                    b.Property<string>("DegreeOfEducation")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator().HasValue(1);
-                });
-
-            modelBuilder.Entity("College.Entities.Users.Student", b =>
-                {
-                    b.HasBaseType("College.Entities.Users.User");
-
-                    b.Property<byte>("ConditionalSemesters")
-                        .HasColumnType("tinyint");
-
-                    b.Property<DateTime>("EntryDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Grade")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("GraduationDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<byte>("SemestersTaken")
-                        .HasColumnType("tinyint");
-
-                    b.Property<int>("State")
-                        .HasColumnType("int");
-
-                    b.ToTable("AspNetUsers");
-
-                    b.HasDiscriminator().HasValue(2);
-                });
-
             modelBuilder.Entity("College.Entities.Classroom", b =>
                 {
                     b.HasOne("College.Entities.Lesson", "Lesson")
@@ -402,7 +430,7 @@ namespace College.Data.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("College.Entities.Users.User", "Professor")
+                    b.HasOne("College.Entities.Users.Professor", "Professor")
                         .WithMany("Classrooms")
                         .HasForeignKey("ProfessorId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -419,6 +447,25 @@ namespace College.Data.Migrations
                     b.Navigation("Professor");
 
                     b.Navigation("Term");
+                });
+
+            modelBuilder.Entity("College.Entities.StudentClassroom", b =>
+                {
+                    b.HasOne("College.Entities.Classroom", "classroom")
+                        .WithMany("StudentClassrooms")
+                        .HasForeignKey("ClassroomId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("College.Entities.Users.Student", "Student")
+                        .WithMany("StudentClassrooms")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Student");
+
+                    b.Navigation("classroom");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -472,6 +519,11 @@ namespace College.Data.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("College.Entities.Classroom", b =>
+                {
+                    b.Navigation("StudentClassrooms");
+                });
+
             modelBuilder.Entity("College.Entities.Lesson", b =>
                 {
                     b.Navigation("Classrooms");
@@ -482,9 +534,14 @@ namespace College.Data.Migrations
                     b.Navigation("Classrooms");
                 });
 
-            modelBuilder.Entity("College.Entities.Users.User", b =>
+            modelBuilder.Entity("College.Entities.Users.Professor", b =>
                 {
                     b.Navigation("Classrooms");
+                });
+
+            modelBuilder.Entity("College.Entities.Users.Student", b =>
+                {
+                    b.Navigation("StudentClassrooms");
                 });
 #pragma warning restore 612, 618
         }

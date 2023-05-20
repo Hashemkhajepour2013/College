@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace College.Data.Users.Students.Contracts.Dtos
 {
-    public class AddStudentDto : BaseDto<AddStudentDto, Student>, IValidatableObject
+    public class AddStudentDto : BaseDto<AddStudentDto, User>, IValidatableObject
     {
         [Required]
         [MaxLength(100)]
