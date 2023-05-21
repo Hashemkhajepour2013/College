@@ -46,6 +46,14 @@ namespace College.Services.Users.Students
                 .FirstOrDefaultAsync(cancellationToken);
         }
 
+        public async Task<List<GetAllStudentDto>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _repository.TableNoTracking
+                .Include(_ => _.User)
+                .ProjectTo<GetAllStudentDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+        }
+
         private async Task StopIfUserRoleNotFound(User? user)
         {
             var userRoles = await _userManager.GetRolesAsync(user);

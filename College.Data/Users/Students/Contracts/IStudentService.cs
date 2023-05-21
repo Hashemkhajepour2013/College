@@ -7,5 +7,7 @@ namespace College.Data.Users.Students.Contracts
         Task Add(AddStudentDto dto, CancellationToken cancellationToken);
 
         Task<GetStudentByIdDto?> GetById(int id, CancellationToken cancellationToken);
+
+        Task<List<GetAllStudentDto>> GetAll(CancellationToken cancellationToken);
     }
 }

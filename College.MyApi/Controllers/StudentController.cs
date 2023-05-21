@@ -35,5 +35,12 @@ namespace College.MyApi.Controllers
         {
             return await _service.GetById(id, cancellationToken);
         }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin, User")]
+        public async Task<ApiResult<List<GetAllStudentDto>>> GetAll(CancellationToken cancellationToken)
+        {
+            return await _service.GetAll(cancellationToken);
+        }
     }
 }
