@@ -24,18 +24,16 @@ namespace College.MyApi.Controllers
         [Authorize(Roles = "Admin")]
         public async Task<ApiResult> Add(AddStudentDto dto, CancellationToken cancellationToken)
         {
-            dto.UsernameOfMaker = HttpContext.User.Identity.Name;
-
             await _service.Add(dto, cancellationToken);
 
             return Ok();
         }
 
-        [HttpGet("{userId}")]
+        [HttpGet("{id}")]
         [Authorize(Roles = "Admin, User")]
-        public async Task<ApiResult<GetStudentByIdDto?>> GetById(int userId, CancellationToken cancellationToken)
+        public async Task<ApiResult<GetStudentByIdDto?>> GetById(int id, CancellationToken cancellationToken)
         {
-            return await _service.GetById(userId, cancellationToken);
+            return await _service.GetById(id, cancellationToken);
         }
     }
 }

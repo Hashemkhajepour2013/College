@@ -4,41 +4,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace College.Data.Users.Students.Contracts.Dtos
 {
-    public class AddStudentDto : BaseDto<AddStudentDto, User>, IValidatableObject
+    public class AddStudentDto : BaseDto<AddStudentDto, Student>, IValidatableObject
     {
-        [Required]
-        [MaxLength(100)]
-        public string FirstName { get; set; } = null!;
-
-        [Required]
-        [MaxLength(100)]
-        public string LastName { get; set; } = null!;
-
-        [Required]
-        [MaxLength(100)]
-        public string FatherName { get; set; } = null!;
-
-        [Required]
-        [MaxLength(10)]
-        public string NationalCode { get; set; } = null!;
-
-        [Required]
-        [MaxLength(11)]
-        public string Mobile { get; set; } = null!;
-
-        [Required]
-        [MaxLength(50)]
-        public string UserName { get; set; } = null!;
-
-        [Required]
-        [MaxLength(50)]
-        public string Password { get; set; } = null!;
-
-        [Required]
-        [MaxLength(50)]
-        public string Email { get; set; } = null!;
-
-        public string UsernameOfMaker { get; set; }
+        public int UserId { get; set; }
 
         public DateTime EntryDate { get; set; }
         public DateTime GraduationDate { get; set; }

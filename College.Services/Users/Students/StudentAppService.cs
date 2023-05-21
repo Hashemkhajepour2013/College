@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using College.Common;
+using College.Common.Exceptions;
 using College.Data.Users.Students.Contracts;
 using College.Data.Users.Students.Contracts.Dtos;
 using College.Entities.Users;
@@ -27,32 +28,37 @@ namespace College.Services.Users.Students
 
         public async Task Add(AddStudentDto dto, CancellationToken cancellationToken)
         {
-            var user = dto.ToEntity(_mapper);
+            User? user = await StopIfUserNotFound(dto);
 
-            await _userManager.CreateAsync(user, dto.Password);
+            await StopIfUserRoleNotFound(user);
 
-            await _userManager.AddToRoleAsync(user, "User");
-
-            var student = new Student
-            {
-                ConditionalSemesters = dto.ConditionalSemesters,
-                EntryDate = dto.EntryDate,
-                Grade = dto.Grade,
-                GraduationDate = dto.GraduationDate,
-                SemestersTaken = dto.SemestersTaken,
-                State = dto.State,
-                UserId = user.Id
-            };
+            var student = dto.ToEntity(_mapper);
 
             await _repository.AddAsync(student, cancellationToken);
         }
 
-        public async Task<GetStudentByIdDto?> GetById(int userId, CancellationToken cancellationToken)
+        public async Task<GetStudentByIdDto?> GetById(int id, CancellationToken cancellationToken)
         {
             return await _repository.TableNoTracking
                 .Include(_ => _.User)
+                .Where(_ => _.Id == id)
                 .ProjectTo<GetStudentByIdDto>(_mapper.ConfigurationProvider)
                 .FirstOrDefaultAsync(cancellationToken);
+        }
+
+        private async Task StopIfUserRoleNotFound(User? user)
+        {
+            var userRoles = await _userManager.GetRolesAsync(user);
+            if (!userRoles.Contains("Student"))
+                throw new BadRequestException("کاربر دارای نقش لازم نمی باشد");
+        }
+
+        private async Task<User?> StopIfUserNotFound(AddStudentDto dto)
+        {
+            var user = await _userManager.FindByIdAsync(dto.UserId.ToString());
+            if (user == null)
+                throw new NotFoundException("کاربر یافت نشد");
+            return user;
         }
     }
 }
