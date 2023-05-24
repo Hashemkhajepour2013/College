@@ -36,6 +36,12 @@ namespace College.Data.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("ExamDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
+
                     b.Property<int>("LessonId")
                         .HasColumnType("int");
 

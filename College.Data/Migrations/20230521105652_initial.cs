@@ -241,9 +241,11 @@ namespace College.Data.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ExamDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Capacity = table.Column<byte>(type: "tinyint", nullable: false),
                     TermId = table.Column<int>(type: "int", nullable: false),
                     LessonId = table.Column<int>(type: "int", nullable: false),
+                    Grade = table.Column<int>(type: "int", nullable: false),
                     ProfessorId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>

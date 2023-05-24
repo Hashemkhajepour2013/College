@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace College.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230521081615_initial")]
+    [Migration("20230521105652_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -38,6 +38,12 @@ namespace College.Data.Migrations
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("ExamDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Grade")
+                        .HasColumnType("int");
 
                     b.Property<int>("LessonId")
                         .HasColumnType("int");

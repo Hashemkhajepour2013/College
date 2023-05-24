@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using College.Common;
 using College.Common.Exceptions;
+using College.Data.Classrooms.Contracts;
 using College.Data.Users.Students.Contracts;
 using College.Data.Users.Students.Contracts.Dtos;
 using College.Entities.Users;
@@ -13,15 +14,18 @@ namespace College.Services.Users.Students
     public class StudentAppService : IStudentService, IScopedDependency
     {
         private readonly IStudentRepository _repository;
+        private readonly IClassroomRepository _classroomRepository;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
 
         public StudentAppService(
             IStudentRepository repository,
+            IClassroomRepository classroomRepository,
             UserManager<User> userManager,
             IMapper mapper)
         {
             _repository = repository;
+            _classroomRepository = classroomRepository;
             _userManager = userManager;
             _mapper = mapper;
         }
@@ -51,6 +55,17 @@ namespace College.Services.Users.Students
             return await _repository.TableNoTracking
                 .Include(_ => _.User)
                 .ProjectTo<GetAllStudentDto>(_mapper.ConfigurationProvider)
+                .ToListAsync(cancellationToken);
+        }
+
+        public async Task<List<GetClassesForUnitSelectDto>> GetClassesForUnitSelect(
+            int id, CancellationToken cancellationToken)
+        {
+            var student = await _repository.GetByIdAsync(cancellationToken, id);
+
+            return await _classroomRepository.TableNoTracking
+                .Where(_ => _.Grade == student.Grade)
+                .ProjectTo<GetClassesForUnitSelectDto>(_mapper.ConfigurationProvider)
                 .ToListAsync(cancellationToken);
         }
 

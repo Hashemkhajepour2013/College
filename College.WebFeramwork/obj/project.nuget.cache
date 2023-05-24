@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3/iPU3mWPrcnt7nIAVcAGpKcFvqeanr7MxEZe2QO3k7tJQNgo7mClO8wly19cE4XPPQFkWptJdj/MT7YrulC+A==",
+  "dgSpecHash": "16FlIALnnQd7PqNXf+jGtlI/J9hBl51pXXTIcpAUog2DKurRvnV1pDfsQxU4JBOy7GcONfKCJuGk1dgAKXHQ/g==",
   "success": true,
   "projectFilePath": "C:\\Users\\hashem\\Desktop\\College\\College.WebFeramwork\\College.WebFrameWork.csproj",
   "expectedPackageFiles": [
@@ -81,6 +81,7 @@
     "C:\\Users\\hashem\\.nuget\\packages\\nlog.extensions.logging\\1.7.4\\nlog.extensions.logging.1.7.4.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\nlog.web.aspnetcore\\4.14.0\\nlog.web.aspnetcore.4.14.0.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\pluralize.net\\1.0.2\\pluralize.net.1.0.2.nupkg.sha512",
+    "C:\\Users\\hashem\\.nuget\\packages\\restsharp\\110.2.0\\restsharp.110.2.0.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\scrutor\\3.3.0\\scrutor.3.3.0.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\sentry\\3.13.0\\sentry.3.13.0.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\sentry.nlog\\3.13.0\\sentry.nlog.3.13.0.nupkg.sha512",
@@ -118,8 +119,8 @@
     "C:\\Users\\hashem\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\system.text.encoding\\4.3.0\\system.text.encoding.4.3.0.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\system.text.encoding.codepages\\5.0.0\\system.text.encoding.codepages.5.0.0.nupkg.sha512",
-    "C:\\Users\\hashem\\.nuget\\packages\\system.text.encodings.web\\4.7.2\\system.text.encodings.web.4.7.2.nupkg.sha512",
-    "C:\\Users\\hashem\\.nuget\\packages\\system.text.json\\4.7.2\\system.text.json.4.7.2.nupkg.sha512",
+    "C:\\Users\\hashem\\.nuget\\packages\\system.text.encodings.web\\7.0.0\\system.text.encodings.web.7.0.0.nupkg.sha512",
+    "C:\\Users\\hashem\\.nuget\\packages\\system.text.json\\7.0.2\\system.text.json.7.0.2.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\system.threading.tasks\\4.3.0\\system.threading.tasks.4.3.0.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Users\\hashem\\.nuget\\packages\\system.windows.extensions\\5.0.0\\system.windows.extensions.5.0.0.nupkg.sha512"

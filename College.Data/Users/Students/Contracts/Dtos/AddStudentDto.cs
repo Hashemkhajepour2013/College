@@ -1,4 +1,5 @@
-﻿using College.Entities.Users;
+﻿using College.Entities.Common;
+using College.Entities.Users;
 using College.MyApi;
 using System.ComponentModel.DataAnnotations;
 

@@ -42,5 +42,12 @@ namespace College.MyApi.Controllers
         {
             return await _service.GetAll(cancellationToken);
         }
+
+        [HttpGet("classes-for-unit-select/{id}")]
+        [Authorize(Roles = "Admin, Student")]
+        public async Task<ApiResult<List<GetClassesForUnitSelectDto>>> GetClassesForUnitSelect(int id, CancellationToken cancellationToken)
+        {
+            return await _service.GetClassesForUnitSelect(id, cancellationToken);
+        }
     }
 }

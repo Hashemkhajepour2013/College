@@ -31,19 +31,4 @@ namespace College.Entities.Users
         [Display(Name = "تعویق شده")]
         adjournment=4
     }
-
-    public enum Grade
-    {
-        [Display(Name = "کاردانی")]
-        AssociateDegree =1,
-
-        [Display(Name = "کارشناسی")]
-        BachelorDegree = 2,
-
-        [Display(Name = "کارشناسی ارشد")]
-        Masters = 3,
-
-        [Display(Name = "دکتری")]
-        PhD = 4
-    }
 }

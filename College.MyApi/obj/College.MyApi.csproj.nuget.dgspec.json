@@ -448,6 +448,10 @@
               "target": "Package",
               "version": "[4.14.0, )"
             },
+            "RestSharp": {
+              "target": "Package",
+              "version": "[110.2.0, )"
+            },
             "Sentry.NLog": {
               "target": "Package",
               "version": "[3.13.0, )"
