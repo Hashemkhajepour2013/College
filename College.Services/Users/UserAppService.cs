@@ -7,6 +7,7 @@ using College.Data.Users.Contracts.Dtos;
 using College.Entities.Users;
 using College.Services.JWT.Contracts;
 using College.Services.JWT.Contracts.Dto;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

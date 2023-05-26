@@ -6,6 +6,9 @@ namespace College.Entities.Users
     public class Professor : BaseEntity
     {
         public int UserId { get; set; }
+
+        public User User { get; set; }
+
         public string DegreeOfEducation { get; set; }
 
         public ContractType ContractType { get; set; }
