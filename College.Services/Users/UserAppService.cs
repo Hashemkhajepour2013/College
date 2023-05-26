@@ -16,15 +16,18 @@ namespace College.Services.Users
     {
         private IJwtService _jwtService;
         private readonly UserManager<User> _userManager;
+        private readonly IUserRepository _repository;
         private readonly IMapper _mapper;
 
         public UserAppService(
             IJwtService jwtService,
             UserManager<User> userManager,
+            IUserRepository repository,
             IMapper mapper)
         {
             _jwtService = jwtService;
             _userManager = userManager;
+            _repository = repository;
             _mapper = mapper;
         }
 
@@ -107,6 +110,35 @@ namespace College.Services.Users
             if (user == null)
                 throw new NotFoundException("کاربری با این مشخصات یافت نشد");
             return user;
+        }
+
+        public async Task IncreaseWalletBalance(UserWalletDto dto, CancellationToken cancellation)
+        {
+            var user = _repository.GetUserByUserName(dto.UserName);
+
+            var user2 = _repository.GetUserByUserName(dto.UserName);
+
+            user.FirstName = "mohamad";
+
+            user2.FirstName = "ahmad";
+
+            try
+            {
+                 _repository.Update(user);
+            }
+            catch(DbUpdateConcurrencyException ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
+
+            try
+            {
+                _repository.Update(user2);
+            }
+            catch (DbUpdateConcurrencyException ex)
+            {
+                throw new BadRequestException(ex.Message);
+            }
         }
     }
 }

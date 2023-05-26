@@ -1,6 +1,4 @@
-﻿using Azure.Core;
-using College.Data.Users.Contracts.Dtos;
-using College.Entities;
+﻿using College.Data.Users.Contracts.Dtos;
 using College.Services.JWT.Contracts.Dto;
 
 namespace College.Data.Users.Contracts
@@ -20,5 +18,7 @@ namespace College.Data.Users.Contracts
         Task<AccessUserToken> Token(LoginUserDto dto, CancellationToken cancellationToken);
 
         Task UpdateSecurityStamp(string userName);
+
+        Task IncreaseWalletBalance(UserWalletDto dto, CancellationToken cancellation);
     }
 }

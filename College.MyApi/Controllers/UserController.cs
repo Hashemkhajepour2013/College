@@ -67,9 +67,15 @@ namespace College.MyApi.Controllers
 
         [AllowAnonymous]
         [HttpPost("invalid-token")]
-        public async void InvalidTokens([Required]string userName)
+        public async void InvalidTokens([Required] string userName)
         {
-           await _service.UpdateSecurityStamp(userName);
+            await _service.UpdateSecurityStamp(userName);
+        }
+
+        [HttpPost("increase-wallet-balance")]
+        public async Task IncreaseWalletBalance(UserWalletDto dto, CancellationToken cancellationToken)
+        {
+            await _service.IncreaseWalletBalance(dto, cancellationToken);
         }
     }
 }

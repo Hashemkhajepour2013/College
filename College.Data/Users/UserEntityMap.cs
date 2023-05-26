@@ -17,6 +17,9 @@ namespace College.Data.Users
             builder.Property(_ => _.Mobile).HasMaxLength(11).IsRequired();
             builder.Property(_ => _.ImageName).HasMaxLength(455).IsRequired(false);
             builder.Property(_ => _.UsernameOfMaker).HasMaxLength(50).IsRequired();
+            builder.Property(_ => _.Wallet).IsRequired();
+
+            builder.Property(_ => _.RowVersion).IsConcurrencyToken();
         }
     }
 }

@@ -236,3 +236,4 @@ C:\Users\hashem\Desktop\College\College.MyApi\obj\Debug\net7.0\refint\College.My
 C:\Users\hashem\Desktop\College\College.MyApi\obj\Debug\net7.0\College.MyApi.pdb
 C:\Users\hashem\Desktop\College\College.MyApi\obj\Debug\net7.0\College.MyApi.genruntimeconfig.cache
 C:\Users\hashem\Desktop\College\College.MyApi\obj\Debug\net7.0\ref\College.MyApi.dll
+C:\Users\hashem\Desktop\College\College.MyApi\bin\Debug\net7.0\RestSharp.dll

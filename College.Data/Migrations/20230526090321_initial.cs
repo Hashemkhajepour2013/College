@@ -39,6 +39,8 @@ namespace College.Data.Migrations
                     Mobile = table.Column<string>(type: "nvarchar(11)", maxLength: 11, nullable: false),
                     ImageName = table.Column<string>(type: "nvarchar(455)", maxLength: 455, nullable: true),
                     UsernameOfMaker = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Wallet = table.Column<int>(type: "int", nullable: false),
+                    RowVersion = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

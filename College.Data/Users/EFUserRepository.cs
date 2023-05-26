@@ -19,5 +19,17 @@ namespace College.Data.Users
             return await TableNoTracking
                 .SingleOrDefaultAsync(_ => _.UserName == dto.UserName && _.PasswordHash == dto.Password, cancellationToken);
         }
+
+        public User GetUserByUserName(string userName)
+        {
+            return Table.FirstOrDefault(_ => _.UserName == userName);
+        }
+
+        public void Update(User user)
+        {
+            Entities.Update(user);
+            
+            DbContext.SaveChanges();
+        }
     }
 }
